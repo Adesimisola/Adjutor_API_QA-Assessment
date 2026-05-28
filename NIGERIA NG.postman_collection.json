@@ -1,0 +1,840 @@
+{
+  "info": {
+    "_postman_id": "035da5c1-a15d-4216-85c5-6cf412d5efae",
+    "name": "NIGERIA NG",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "52546313"
+  },
+  "item": [
+    {
+      "name": "Validation NG",
+      "item": [
+        {
+          "name": "Bank Verification Number",
+          "item": [
+            {
+              "name": "Initialize BVN consent",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "// Validate successful status code",
+                      "pm.test(\"Status code is successful\", function () {",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 401, 403, 404, 500, 502, 503, 504]);",
+                      "});",
+                      "",
+                      "pm.test(\"Response time is below 5 seconds\", function () {",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);",
+                      "});",
+                      "",
+                      "// Validate response format",
+                      "pm.test(\"Response is JSON\", function () {",
+                      "    pm.response.to.be.json;",
+                      "});",
+                      "",
+                      "pm.test(\"Response body exists\", function () {",
+                      "    const response = pm.response.json();",
+                      "    pm.expect(response).to.exist;",
+                      "});",
+                      "",
+                      "",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const prefixes = [\"080\", \"081\", \"090\"];\r",
+                      "const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];\r",
+                      "\r",
+                      "const randomPhone = randomPrefix + Math.floor(10000000 + Math.random() * 90000000);\r",
+                      "\r",
+                      "pm.environment.set(\"randomPhone\", randomPhone);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "sk_live_5Ravkr33W16v5PILTyFhHpfPYkJIQcFZwzvP48h9",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"contact\": \"{{randomPhone}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}verification/bvn/:bvn",
+                  "host": [
+                    "{{baseUrl}}verification"
+                  ],
+                  "path": [
+                    "bvn",
+                    ":bvn"
+                  ],
+                  "variable": [
+                    {
+                      "key": "bvn",
+                      "value": "22222222222"
+                    }
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Initialize BVN consent",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n  \"contact\": \"08012345678\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}verification/bvn/22222222222",
+                      "host": [
+                        "{{baseUrl}}verification"
+                      ],
+                      "path": [
+                        "bvn",
+                        "22222222222"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "date",
+                      "value": "Tue, 26 May 2026 20:19:03 GMT"
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "content-length",
+                      "value": "2"
+                    },
+                    {
+                      "key": "access-control-allow-origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "access-control-expose-headers",
+                      "value": "x-api-key"
+                    },
+                    {
+                      "key": "cache-control",
+                      "value": "no-cache, no-store, must-revalidate"
+                    },
+                    {
+                      "key": "last-modified",
+                      "value": "Tue, 26 May 2026 20:19:02 GMT"
+                    },
+                    {
+                      "key": "etag",
+                      "value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+                    },
+                    {
+                      "key": "server",
+                      "value": "cloudflare"
+                    },
+                    {
+                      "key": "x-upstream-latency",
+                      "value": "201"
+                    },
+                    {
+                      "key": "x-proxy-latency",
+                      "value": "1"
+                    },
+                    {
+                      "key": "via",
+                      "value": "1.1 kong/3.9.1"
+                    },
+                    {
+                      "key": "x-request-id",
+                      "value": "5130050d6437b6518ba0290c5552a301"
+                    },
+                    {
+                      "key": "cf-cache-status",
+                      "value": "DYNAMIC"
+                    },
+                    {
+                      "key": "cf-ray",
+                      "value": "a01f78f5781326ab-NBO"
+                    },
+                    {
+                      "key": "alt-svc",
+                      "value": "h3=\":443\"; ma=86400"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{}"
+                }
+              ]
+            },
+            {
+              "name": "Complete Consent and Get BVN Details",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "// Validate successful status code\r",
+                      "pm.test(\"Status code is successful\", function () {\r",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 401, 403, 404, 500, 502, 503, 504]);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response time is below 5 seconds\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      "// Validate response format\r",
+                      "pm.test(\"Response is JSON\", function () {\r",
+                      "    pm.response.to.be.json;\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response body exists\", function () {\r",
+                      "    const response = pm.response.json();\r",
+                      "    pm.expect(response).to.exist;\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const randomOtp = Math.floor(100000 + Math.random() * 900000);\r",
+                      "\r",
+                      "pm.environment.set(\"randomOtp\", randomOtp);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json",
+                    "type": "text"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"otp\": \"{{randomOtp}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}verification/bvn/22482931994",
+                  "host": [
+                    "{{baseUrl}}verification"
+                  ],
+                  "path": [
+                    "bvn",
+                    "22482931994"
+                  ]
+                }
+              },
+              "response": [
+                {
+                  "name": "Complete Consent and Get BVN Details",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json",
+                        "type": "text"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n    \"otp\": \"623553\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}verification/bvn/22482931994",
+                      "host": [
+                        "{{baseUrl}}verification"
+                      ],
+                      "path": [
+                        "bvn",
+                        "22482931994"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": null,
+                  "header": [
+                    {
+                      "key": ":status",
+                      "value": 200
+                    },
+                    {
+                      "key": "date",
+                      "value": "Tue, 26 May 2026 20:41:45 GMT"
+                    },
+                    {
+                      "key": "content-type",
+                      "value": "application/json; charset=utf-8"
+                    },
+                    {
+                      "key": "content-length",
+                      "value": "2"
+                    },
+                    {
+                      "key": "access-control-allow-origin",
+                      "value": "*"
+                    },
+                    {
+                      "key": "access-control-expose-headers",
+                      "value": "x-api-key"
+                    },
+                    {
+                      "key": "cache-control",
+                      "value": "no-cache, no-store, must-revalidate"
+                    },
+                    {
+                      "key": "last-modified",
+                      "value": "Tue, 26 May 2026 20:41:45 GMT"
+                    },
+                    {
+                      "key": "etag",
+                      "value": "W/\"2-vyGp6PvFo4RvsFtPoIWeCReyIC8\""
+                    },
+                    {
+                      "key": "server",
+                      "value": "cloudflare"
+                    },
+                    {
+                      "key": "x-upstream-latency",
+                      "value": "163"
+                    },
+                    {
+                      "key": "x-proxy-latency",
+                      "value": "0"
+                    },
+                    {
+                      "key": "via",
+                      "value": "1.1 kong/3.9.1"
+                    },
+                    {
+                      "key": "x-request-id",
+                      "value": "086f8a115bed1868a94757635ec66947"
+                    },
+                    {
+                      "key": "cf-cache-status",
+                      "value": "DYNAMIC"
+                    },
+                    {
+                      "key": "cf-ray",
+                      "value": "a01f9a3bad2eaf03-NBO"
+                    },
+                    {
+                      "key": "alt-svc",
+                      "value": "h3=\":443\"; ma=86400"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Get Accounts for BVN",
+          "item": [
+            {
+              "name": "Initialize BVN Accounts Consent",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "// Validate successful status code\r",
+                      "pm.test(\"Status code is successful\", function () {\r",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 401, 403, 404, 500, 502, 503, 504]);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response time is below 5 seconds\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      "// Validate response format\r",
+                      "pm.test(\"Response is JSON\", function () {\r",
+                      "    pm.response.to.be.json;\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response body exists\", function () {\r",
+                      "    const response = pm.response.json();\r",
+                      "    pm.expect(response).to.exist;\r",
+                      "});\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const prefixes = [\"080\", \"081\", \"090\"];\r",
+                      "const randomPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];\r",
+                      "\r",
+                      "const randomPhone = randomPrefix + Math.floor(10000000 + Math.random() * 90000000);\r",
+                      "\r",
+                      "pm.environment.set(\"randomPhone\", randomPhone);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"contact\": \"{{randomPhone}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}verification/bvn/:bvn/accounts",
+                  "host": [
+                    "{{baseUrl}}verification"
+                  ],
+                  "path": [
+                    "bvn",
+                    ":bvn",
+                    "accounts"
+                  ],
+                  "variable": [
+                    {
+                      "key": "bvn",
+                      "value": "22222222222"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "Complete Consent and Get BVN Accounts",
+              "event": [
+                {
+                  "listen": "prerequest",
+                  "script": {
+                    "exec": [
+                      "const randomOtp = Math.floor(100000 + Math.random() * 900000);\r",
+                      "\r",
+                      "pm.environment.set(\"randomOtp\", randomOtp);"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                },
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "// Validate successful status code\r",
+                      "pm.test(\"Status code is successful\", function () {\r",
+                      "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 401, 403, 404, 500, 502, 503, 504]);\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response time is below 5 seconds\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                      "});\r",
+                      "\r",
+                      "// Validate response format\r",
+                      "pm.test(\"Response is JSON\", function () {\r",
+                      "    pm.response.to.be.json;\r",
+                      "});\r",
+                      "\r",
+                      "pm.test(\"Response body exists\", function () {\r",
+                      "    const response = pm.response.json();\r",
+                      "    pm.expect(response).to.exist;\r",
+                      "});"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"otp\": \"{{randomOtp}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}verification/bvn/:bvn/accounts",
+                  "host": [
+                    "{{baseUrl}}verification"
+                  ],
+                  "path": [
+                    "bvn",
+                    ":bvn",
+                    "accounts"
+                  ],
+                  "variable": [
+                    {
+                      "key": "bvn",
+                      "value": "22482931994"
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Credit Bureaus",
+      "item": [
+        {
+          "name": "Credit Report from CRC Credit Bureau",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Validate successful status code\r",
+                  "pm.test(\"Status code is successful\", function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 401, 403, 404, 500, 502, 503, 504]);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response time is below 5 seconds\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "\r",
+                  "// Validate response format\r",
+                  "pm.test(\"Response is JSON\", function () {\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body exists\", function () {\r",
+                  "    const response = pm.response.json();\r",
+                  "    pm.expect(response).to.exist;\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}creditbureaus/crc/:bvn",
+              "host": [
+                "{{baseUrl}}creditbureaus"
+              ],
+              "path": [
+                "crc",
+                ":bvn"
+              ],
+              "variable": [
+                {
+                  "key": "bvn",
+                  "value": "22482931994"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Credit Report from First Central Credit Bureau",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Validate successful status code\r",
+                  "pm.test(\"Status code is successful\", function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 401, 403, 404, 500, 502, 503, 504]);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response time is below 5 seconds\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "\r",
+                  "// Validate response format\r",
+                  "pm.test(\"Response is JSON\", function () {\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body exists\", function () {\r",
+                  "    const response = pm.response.json();\r",
+                  "    pm.expect(response).to.exist;\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}creditbureaus/firstcentral/:bvn",
+              "host": [
+                "{{baseUrl}}creditbureaus"
+              ],
+              "path": [
+                "firstcentral",
+                ":bvn"
+              ],
+              "variable": [
+                {
+                  "key": "bvn",
+                  "value": "22482931994"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Decisioning",
+      "item": [
+        {
+          "name": "Get Decision Models",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Validate successful status code\r",
+                  "pm.test(\"Status code is successful\", function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 401, 403, 404, 500, 502, 503, 504]);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response time is below 5 seconds\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "\r",
+                  "// Validate response format\r",
+                  "pm.test(\"Response is JSON\", function () {\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body exists\", function () {\r",
+                  "    const response = pm.response.json();\r",
+                  "    pm.expect(response).to.exist;\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/decisioning/models",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "decisioning",
+                "models"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Get Decision Models Details",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "// Validate successful status code\r",
+                  "pm.test(\"Status code is successful\", function () {\r",
+                  "    pm.expect(pm.response.code).to.be.oneOf([200, 400, 401, 403, 404, 500, 502, 503, 504]);\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response time is below 5 seconds\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+                  "});\r",
+                  "\r",
+                  "// Validate response format\r",
+                  "pm.test(\"Response is JSON\", function () {\r",
+                  "    pm.response.to.be.json;\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"Response body exists\", function () {\r",
+                  "    const response = pm.response.json();\r",
+                  "    pm.expect(response).to.exist;\r",
+                  "});\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/decisioning/models/:id/settings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "decisioning",
+                "models",
+                ":id",
+                "settings"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "001"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "Your_API_Key",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "API_Key",
+      "value": ""
+    }
+  ]
+}
